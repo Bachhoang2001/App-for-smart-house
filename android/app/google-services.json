@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "791375777213",
+    "project_id": "app-for-smart-house",
+    "storage_bucket": "app-for-smart-house.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791375777213:android:22c9f9d0ea7461192b16d4",
+        "android_client_info": {
+          "package_name": "com.example.door_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791375777213-62eekvmhj9u8qrdr2d7605jkqjk7rqtg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.door_manager",
+            "certificate_hash": "d6e37ac87bff4c2b8eee67f1e1e3410086542363"
+          }
+        },
+        {
+          "client_id": "791375777213-f9ao5imhq94smvpg839reu59equ5l6il.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8zp_lEFPJMSYilXwQEDHZwHDAN5iGHg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791375777213-f9ao5imhq94smvpg839reu59equ5l6il.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

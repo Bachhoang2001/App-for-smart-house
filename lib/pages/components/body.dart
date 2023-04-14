@@ -34,7 +34,7 @@ class Body extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               SizedBox(
-                height: 30,
+                height: 100,
               ),
               Container(
                 alignment: Alignment.topCenter,
@@ -43,26 +43,27 @@ class Body extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
-                      color: KMainText),
+                      color: KMainText,
+                      letterSpacing: 0.6),
                 ),
               ),
               SizedBox(
-                height: 50,
+                height: 120,
               ),
               Icon(
                 Icons.verified_user,
-                size: 130,
+                size: 140,
                 color: KMainText,
               ),
               SizedBox(
-                height: 60,
+                height: 120,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Container(
                     width: size.width * 0.8,
-                    height: size.height / 15,
+                    height: size.height / 14,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(29),
                       child: MaterialButton(
@@ -76,18 +77,21 @@ class Body extends StatelessWidget {
                           }));
                         },
                         child: Text(
-                          "LOGIN",
-                          style: TextStyle(color: Colors.white),
+                          "SIGN IN",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 13.5,
+                              letterSpacing: 0.8),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   Container(
                     width: size.width * 0.8,
-                    height: size.height / 15,
+                    height: size.height / 14,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(29),
                       child: MaterialButton(
@@ -102,7 +106,10 @@ class Body extends StatelessWidget {
                         },
                         child: Text(
                           "SIGN UP",
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 13.5,
+                              letterSpacing: 0.8),
                         ),
                       ),
                     ),
