@@ -218,7 +218,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   email: emailTextEditingController.text,
                                   password: passwordTextEditingController.text)
                               .then((value) {
-                            Navigator.pushNamed(context, '/home');
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                HomeScreen() as Route<Object?>,
+                                (route) => false);
                           }).onError((error, stackTrace) {
                             print("Error ${error.toString()}");
                           });
@@ -233,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
