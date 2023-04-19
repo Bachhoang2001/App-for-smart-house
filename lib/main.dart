@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/home': (context) => HomeScreen(),
-        '/signin': (context) => LoginScreen(),
-        '/signup': (context) => SignupScreen()
+        '/home': (context) => const HomeScreen(),
+        '/signin': (context) => const LoginScreen(),
+        '/signup': (context) => const SignupScreen()
       },
       debugShowCheckedModeBanner: false,
       title: 'Door Manager',

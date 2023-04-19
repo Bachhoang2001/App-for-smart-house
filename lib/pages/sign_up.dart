@@ -4,6 +4,7 @@ import 'package:door_manager/constants.dart';
 import 'package:door_manager/pages/home.dart';
 import 'package:door_manager/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -183,6 +184,12 @@ class _SignupScreenState extends State<SignupScreen> {
                         onPressed: () {
                           print("Click signup");
                           //registerNewUser(context);
+                          final Map<String, dynamic> userInfor = {
+                            'name': nameTextEditingController.text,
+                            'email': emailTextEditingController.text,
+                            'phoneNumber': phoneTextEditingController.text,
+                          };
+                          saveUserToFirestore(userInfor);
                           FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
                                   email: emailTextEditingController.text,
@@ -234,6 +241,15 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  void saveUserToFirestore(Map<String, dynamic> userInfo) async {
+    try {
+      await FirebaseFirestore.instance.collection('users').add(userInfo);
+      print('User added');
+    } catch (error) {
+      print('Error adding user: $error');
+    }
   }
 
   // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
