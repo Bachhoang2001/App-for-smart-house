@@ -218,10 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   email: emailTextEditingController.text,
                                   password: passwordTextEditingController.text)
                               .then((value) {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                HomeScreen() as Route<Object?>,
-                                (route) => false);
+                            Navigator.pushNamed(context, "/home");
                           }).onError((error, stackTrace) {
                             print("Error ${error.toString()}");
                           });

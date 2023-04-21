@@ -59,7 +59,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         image: NetworkImage(
-                            "https://randomuser.me/api/portraits/women/13.jpg"),
+                            "https://kynguyenlamdep.com/wp-content/uploads/2022/06/avatar-cute-vui-nhon.jpg"),
                         fit: BoxFit.cover,
                       ),
                       border: Border.all(width: 2, color: Colors.white),
@@ -72,7 +72,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Hi Vaishali",
+                        "Hi Bach",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -104,15 +104,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               drawerTile(Icons.people_alt_outlined, "Manage Users", () {}),
               drawerTile(Icons.tv_outlined, "Devices", () {}),
-              drawerTile(Icons.bed, "Rooms", () {}),
-              drawerTile(Icons.music_note, "Music", () {}),
               drawerTile(Icons.settings, "Settings", () {}),
               drawerTile(Icons.help_outline, "Help", () {}),
               const Spacer(),
               drawerTile(Icons.power_settings_new_outlined, "Logout", () {
                 FirebaseAuth.instance.signOut().then((value) {
-                  Navigator.pushAndRemoveUntil(context,
-                      const HomeScreen() as Route<Object?>, (route) => false);
+                  Navigator.pushNamed(context, "/signin");
                 });
               }),
             ],

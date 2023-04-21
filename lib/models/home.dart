@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class HomeModel {
   String homeImage;
-  String roomTemperature;
+  String homeTemperature;
   int userAccess;
   bool homeStatus;
   List<DeviceInHome>? devices;
   HomeModel({
     required this.homeImage,
-    required this.roomTemperature,
+    required this.homeTemperature,
     required this.userAccess,
     this.homeStatus = false,
     this.devices,
@@ -30,7 +30,7 @@ class DeviceInHome {
 
 HomeModel smartHome = HomeModel(
     homeImage: "assets/images/living_room.jpg",
-    roomTemperature: "25°",
+    homeTemperature: "27°",
     userAccess: 1,
     homeStatus: true,
     devices: [
@@ -38,7 +38,12 @@ HomeModel smartHome = HomeModel(
           deviceName: "Main Door",
           iconOn: Icons.visibility,
           iconOff: Icons.visibility_off,
-          deviceStatus: true)
+          deviceStatus: true),
+      DeviceInHome(
+          deviceName: "Second Door",
+          iconOn: Icons.visibility,
+          iconOff: Icons.visibility_off,
+          deviceStatus: true),
     ]);
 
 // List<HomeModel> smartHomeData = [
