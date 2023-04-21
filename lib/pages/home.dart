@@ -145,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          Expanded(child: RoomCard(homeData: smartHome))
+          Expanded(child: RoomCard(homeData: smartHome)),
         ],
       )),
     );

@@ -2,6 +2,7 @@ import 'package:door_manager/pages/home.dart';
 import 'package:door_manager/pages/intro.dart';
 import 'package:door_manager/constants.dart';
 import 'package:door_manager/pages/login_page.dart';
+import 'package:door_manager/pages/room_control_screen.dart';
 import 'package:door_manager/pages/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => const HomeScreen(),
         '/signin': (context) => const LoginScreen(),
-        '/signup': (context) => const SignupScreen()
+        '/signup': (context) => const SignupScreen(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Door Manager',
