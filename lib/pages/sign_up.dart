@@ -30,227 +30,238 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          width: size.width,
-          height: size.height,
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              Positioned(
-                  top: 0,
-                  left: 0,
-                  child: Image.asset(
-                    "assets/images/signup_top.png",
-                    width: size.width * 0.25,
-                  )),
-              Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Image.asset(
-                    "assets/images/login_bottom.png",
-                    width: size.width * 0.4,
-                  )),
-              Positioned(
-                top: 20,
-                left: size.width * 0.37,
-                child: Text('Sign Up',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: KMainText)),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Image.asset(
-                    "assets/images/ava2.jpg",
-                    width: size.width * 0.5,
-                    height: size.height * 0.3,
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    width: size.width * 0.8,
-                    height: size.height / 11,
-                    decoration: BoxDecoration(
-                        color: kPrimaryLightColor,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: TextField(
-                      controller: nameTextEditingController,
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.person,
-                            color: KMainText,
-                          ),
-                          labelText: "Your Name",
-                          border: InputBorder.none),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            width: size.width,
+            height: size.height,
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Image.asset(
+                      "assets/images/signup_top.png",
+                      width: size.width * 0.25,
+                    )),
+                Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Image.asset(
+                      "assets/images/login_bottom.png",
+                      width: size.width * 0.4,
+                    )),
+                Positioned(
+                  top: 20,
+                  left: size.width * 0.37,
+                  child: Text('Sign Up',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: KMainText)),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    width: size.width * 0.8,
-                    height: size.height / 11,
-                    decoration: BoxDecoration(
-                        color: kPrimaryLightColor,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: TextField(
-                      controller: emailTextEditingController,
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.email,
-                            color: KMainText,
-                          ),
-                          labelText: "Your Email",
-                          hintText: "abc@gmail.com",
-                          border: InputBorder.none),
+                    Image.asset(
+                      "assets/images/ava2.jpg",
+                      width: size.width * 0.5,
+                      height: size.height * 0.3,
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    width: size.width * 0.8,
-                    height: size.height / 11,
-                    decoration: BoxDecoration(
-                        color: kPrimaryLightColor,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: TextField(
-                      controller: phoneTextEditingController,
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.phone,
-                            color: KMainText,
-                          ),
-                          labelText: "Your Phone Number",
-                          border: InputBorder.none),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    width: size.width * 0.8,
-                    height: size.height / 11,
-                    decoration: BoxDecoration(
-                        color: kPrimaryLightColor,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: TextField(
-                      controller: passwordTextEditingController,
-                      obscureText: passwordVisible,
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.lock,
-                            color: KMainText,
-                          ),
-                          labelText: "Password",
-                          suffixIcon: IconButton(
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      width: size.width * 0.8,
+                      height: size.height / 11,
+                      decoration: BoxDecoration(
+                          color: kPrimaryLightColor,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: TextField(
+                        controller: nameTextEditingController,
+                        onChanged: (value) {},
+                        decoration: InputDecoration(
                             icon: Icon(
-                              passwordVisible
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
+                              Icons.person,
                               color: KMainText,
                             ),
-                            onPressed: () {
-                              setState(
-                                () {
-                                  passwordVisible = !passwordVisible;
-                                },
-                              );
-                            },
+                            labelText: "Your Name",
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      width: size.width * 0.8,
+                      height: size.height / 11,
+                      decoration: BoxDecoration(
+                          color: kPrimaryLightColor,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: TextField(
+                        controller: emailTextEditingController,
+                        onChanged: (value) {},
+                        decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.email,
+                              color: KMainText,
+                            ),
+                            labelText: "Your Email",
+                            hintText: "abc@gmail.com",
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      width: size.width * 0.8,
+                      height: size.height / 11,
+                      decoration: BoxDecoration(
+                          color: kPrimaryLightColor,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: TextField(
+                        controller: phoneTextEditingController,
+                        onChanged: (value) {},
+                        decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.phone,
+                              color: KMainText,
+                            ),
+                            labelText: "Your Phone Number",
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      width: size.width * 0.8,
+                      height: size.height / 11,
+                      decoration: BoxDecoration(
+                          color: kPrimaryLightColor,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: TextField(
+                        controller: passwordTextEditingController,
+                        obscureText: passwordVisible,
+                        onChanged: (value) {},
+                        decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.lock,
+                              color: KMainText,
+                            ),
+                            labelText: "Password",
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: KMainText,
+                              ),
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    passwordVisible = !passwordVisible;
+                                  },
+                                );
+                              },
+                            ),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: size.width * 0.8,
+                      height: size.height / 13,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(29),
+                        child: MaterialButton(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 40),
+                          color: KMainText,
+                          onPressed: () {
+                            print("Click signup");
+                            //registerNewUser(context);
+                            final Map<String, dynamic> userInfor = {
+                              'name': nameTextEditingController.text,
+                              'email': emailTextEditingController.text,
+                              'phoneNumber': phoneTextEditingController.text,
+                            };
+                            //saveUserToFirestore(userInfor);
+                            FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: emailTextEditingController.text,
+                                    password:
+                                        passwordTextEditingController.text)
+                                .then((value) {
+                              print("Created an account");
+                              Navigator.pushNamed(context, '/home');
+                            }).onError((error, stackTrace) {
+                              print("Error ${error.toString()}");
+                            });
+                          },
+                          child: Text(
+                            "SIGN UP",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: size.width * 0.035),
                           ),
-                          border: InputBorder.none),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    width: size.width * 0.8,
-                    height: size.height / 13,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(29),
-                      child: MaterialButton(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: KMainText,
-                        onPressed: () {
-                          print("Click signup");
-                          //registerNewUser(context);
-                          final Map<String, dynamic> userInfor = {
-                            'name': nameTextEditingController.text,
-                            'email': emailTextEditingController.text,
-                            'phoneNumber': phoneTextEditingController.text,
-                          };
-                          saveUserToFirestore(userInfor);
-                          FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                                  email: emailTextEditingController.text,
-                                  password: passwordTextEditingController.text)
-                              .then((value) {
-                            print("Created an account");
-                            Navigator.pushNamed(context, '/home');
-                          }).onError((error, stackTrace) {
-                            print("Error ${error.toString()}");
-                          });
-                        },
-                        child: Text(
-                          "SIGN UP",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: size.width * 0.035),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Already have an account ? ",
-                        style: TextStyle(color: kPrimaryLightColor),
-                      ),
-                      InkWell(
-                        child: Text(
-                          'Sign in',
-                          style: TextStyle(color: KMainText),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Already have an account ? ",
+                          style: TextStyle(color: kPrimaryLightColor),
                         ),
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return LoginScreen();
-                          }));
-                        },
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                        InkWell(
+                          child: Text(
+                            'Sign in',
+                            style: TextStyle(color: KMainText),
+                          ),
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return LoginScreen();
+                            }));
+                          },
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  void saveUserToFirestore(Map<String, dynamic> userInfo) async {
-    try {
-      await FirebaseFirestore.instance.collection('users').add(userInfo);
-      print('User added');
-    } catch (error) {
-      print('Error adding user: $error');
-    }
-  }
+  // void saveUserToFirestore(User user) async {
+  //   try {
+  //     await FirebaseFirestore.instance
+  //         .collection('users')
+  //         .doc(user.uid)
+  //         .set(user.toMap());
+  //     print('User added');
+  //   } catch (error) {
+  //     print('Error adding user: $error');
+  //   }
+  // }
 
   // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   // registerNewUser(BuildContext context) async {
