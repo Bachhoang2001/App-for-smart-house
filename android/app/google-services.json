@@ -1,41 +1,42 @@
 {
   "project_info": {
-    "project_number": "791375777213",
-    "project_id": "app-for-smart-house",
-    "storage_bucket": "app-for-smart-house.appspot.com"
+    "project_number": "937163763599",
+    "firebase_url": "https://open-door-2a6c8-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "open-door-2a6c8",
+    "storage_bucket": "open-door-2a6c8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:791375777213:android:22c9f9d0ea7461192b16d4",
+        "mobilesdk_app_id": "1:937163763599:android:40aaab1b528c617a82a5fa",
         "android_client_info": {
-          "package_name": "com.example.door_manager"
+          "package_name": "app_for_smart_home.ver2023"
         }
       },
       "oauth_client": [
         {
-          "client_id": "791375777213-62eekvmhj9u8qrdr2d7605jkqjk7rqtg.apps.googleusercontent.com",
+          "client_id": "937163763599-87cn31dheqv3stou4d540buvnpphnkhr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.door_manager",
+            "package_name": "app_for_smart_home.ver2023",
             "certificate_hash": "d6e37ac87bff4c2b8eee67f1e1e3410086542363"
           }
         },
         {
-          "client_id": "791375777213-f9ao5imhq94smvpg839reu59equ5l6il.apps.googleusercontent.com",
+          "client_id": "937163763599-lo6t0b25693nmm5mvs0m6au36iosvejq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB8zp_lEFPJMSYilXwQEDHZwHDAN5iGHg4"
+          "current_key": "AIzaSyAARA9GfABbV9u3GmpjvufSF1fKh973gGs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "791375777213-f9ao5imhq94smvpg839reu59equ5l6il.apps.googleusercontent.com",
+              "client_id": "937163763599-lo6t0b25693nmm5mvs0m6au36iosvejq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

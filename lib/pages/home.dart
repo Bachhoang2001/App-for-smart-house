@@ -4,6 +4,7 @@ import 'package:door_manager/pages/components/custome_drawer.dart';
 import 'package:door_manager/pages/room_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -126,10 +127,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: KMainText.withOpacity(.1),
                               shape: BoxShape.circle,
                             ),
-                            child: Icon(
-                              Icons.add,
-                              size: 30,
-                              color: Colors.white,
+                            child: InkWell(
+                              child: Icon(
+                                Icons.add,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                              onTap: () {
+                                ImagePicker imagePicker = ImagePicker();
+                                imagePicker.pickImage(
+                                    source: ImageSource.gallery);
+                              },
                             ),
                           ),
                         ],
