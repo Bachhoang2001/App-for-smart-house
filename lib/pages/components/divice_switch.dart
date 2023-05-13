@@ -56,7 +56,7 @@ class _DeviceSwitchState extends State<DeviceSwitch> {
               top: data.deviceStatus ? 0 : (size.height * 0.22 / 2) + 10,
               duration: _duration,
               child: Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(60),

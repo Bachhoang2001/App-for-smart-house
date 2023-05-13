@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 20, top: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,56 +47,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "27\u00b0",
-                          style: TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.bold),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Hi Bach",
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "Welcome to your home !",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: KMainText.withOpacity(.5),
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
                         ),
+                        Spacer(),
                         Container(
-                          width: 90,
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 10,
-                                    spreadRadius: 5,
-                                    color: Colors.black.withOpacity(.1))
-                              ],
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(35),
-                                  bottomLeft: Radius.circular(35))),
-                          child: Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: KMainText,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              size: 30,
-                              color: Colors.white,
-                            ),
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "27\u00b0",
+                            style: TextStyle(
+                                fontSize: 40, fontWeight: FontWeight.bold),
                           ),
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Hi Bach",
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "Welcome to your home !",
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: KMainText.withOpacity(.5),
-                              fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
@@ -127,10 +103,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           userAvatar(
                               "https://randomuser.me/api/portraits/women/87.jpg"),
                           Container(
-                            width: 50,
-                            height: 50,
+                            width: 43,
+                            height: 43,
                             decoration: BoxDecoration(
-                              color: KMainText.withOpacity(.1),
+                              color: KMainText.withOpacity(.5),
                               shape: BoxShape.circle,
                             ),
                             child: InkWell(
@@ -154,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         SizedBox(
                           height: 20,
-                        )
+                        ),
                       ],
                     ),
                   ],

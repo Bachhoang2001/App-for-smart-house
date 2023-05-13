@@ -84,6 +84,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
+                        cursorColor: KMainText,
                         controller: nameTextEditingController,
                         onChanged: (value) {},
                         decoration: InputDecoration(
@@ -92,6 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               color: KMainText,
                             ),
                             labelText: "Your Name",
+                            labelStyle: TextStyle(color: KMainText),
                             border: InputBorder.none),
                       ),
                     ),
@@ -105,6 +107,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
+                        cursorColor: KMainText,
                         controller: emailTextEditingController,
                         onChanged: (value) {},
                         decoration: InputDecoration(
@@ -113,6 +116,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               color: KMainText,
                             ),
                             labelText: "Your Email",
+                            labelStyle: TextStyle(color: KMainText),
                             hintText: "abc@gmail.com",
                             border: InputBorder.none),
                       ),
@@ -127,6 +131,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
+                        cursorColor: KMainText,
                         controller: phoneTextEditingController,
                         onChanged: (value) {},
                         decoration: InputDecoration(
@@ -135,6 +140,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               color: KMainText,
                             ),
                             labelText: "Your Phone Number",
+                            labelStyle: TextStyle(color: KMainText),
                             border: InputBorder.none),
                       ),
                     ),
@@ -148,6 +154,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
+                        cursorColor: KMainText,
                         controller: passwordTextEditingController,
                         obscureText: passwordVisible,
                         onChanged: (value) {},
@@ -157,6 +164,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               color: KMainText,
                             ),
                             labelText: "Password",
+                            labelStyle: TextStyle(color: KMainText),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 passwordVisible

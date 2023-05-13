@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as Path;
 
 import '../constants.dart';
+import 'components/appbar_widget.dart';
 
 class AddImage extends StatefulWidget {
   @override
@@ -22,16 +23,17 @@ class _AddImageState extends State<AddImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Add Image"),
-        actions: [
-          FloatingActionButton(
-            onPressed: () {
-              uploadFile().whenComplete(() => Navigator.of(context).pop());
-            },
-            child: Text('Upload'),
-          )
-        ],
+      appBar: buildAppBar(
+        context,
+        "Add Image",
+        null
+        // FloatingActionButton(
+        //   onPressed: () {
+        //     uploadFile().whenComplete(() => Navigator.of(context).pop());
+        //   },
+        //   child: Text('Upload'),
+        // )
+        ,
       ),
       body: GridView.builder(
         itemCount: _image.length + 1,
@@ -44,7 +46,10 @@ class _AddImageState extends State<AddImage> {
                       onPressed: () {
                         chooseImage();
                       },
-                      icon: Icon(Icons.add)),
+                      icon: Icon(
+                        Icons.add,
+                        color: KMainText,
+                      )),
                 )
               : Container(
                   margin: EdgeInsets.all(3),
