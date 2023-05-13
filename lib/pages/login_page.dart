@@ -135,6 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
+                        style: TextStyle(color: KMainText),
+                        cursorColor: KMainText,
                         controller: emailTextEditingController,
                         onChanged: (value) {},
                         decoration: InputDecoration(
@@ -142,7 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               Icons.person,
                               color: KMainText,
                             ),
-                            labelText: "Your Email",
+                            labelText: "Email",
+                            labelStyle: TextStyle(color: KMainText),
                             hintText: "abc@gmail.com",
                             border: InputBorder.none),
                       ),
@@ -157,6 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
+                        cursorColor: KMainText,
                         controller: passwordTextEditingController,
                         obscureText: passwordVisible,
                         onChanged: (value) {},
@@ -166,6 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: KMainText,
                             ),
                             labelText: "Password",
+                            labelStyle: TextStyle(color: KMainText),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 passwordVisible

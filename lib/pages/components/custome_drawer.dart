@@ -1,5 +1,6 @@
 import 'package:door_manager/constants.dart';
 import 'package:door_manager/pages/home.dart';
+import 'package:door_manager/pages/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -80,7 +81,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                       ),
                       OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return ProfilePage();
+                          }));
+                        },
                         style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.white,
                             side: const BorderSide(color: Colors.white),
@@ -102,9 +108,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 color: Colors.white,
                 height: 40,
               ),
-              drawerTile(Icons.people_alt_outlined, "Manage Users", () {}),
-              drawerTile(Icons.tv_outlined, "Devices", () {}),
-              drawerTile(Icons.settings, "Settings", () {}),
+              drawerTile(Icons.people_alt_outlined, "Manage Members", () {}),
+              drawerTile(Icons.tv_outlined, "Manage Devices", () {}),
+              drawerTile(Icons.history, "View History", () {}),
               drawerTile(Icons.help_outline, "Help", () {}),
               const Spacer(),
               drawerTile(Icons.power_settings_new_outlined, "Logout", () {

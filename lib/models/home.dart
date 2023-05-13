@@ -36,13 +36,13 @@ HomeModel smartHome = HomeModel(
     devices: [
       DeviceInHome(
           deviceName: "Main Door",
-          iconOn: Icons.visibility,
-          iconOff: Icons.visibility_off,
+          iconOn: Icons.lock_outline,
+          iconOff: Icons.lock_open_outlined,
           deviceStatus: true),
       DeviceInHome(
           deviceName: "Second Door",
-          iconOn: Icons.visibility,
-          iconOff: Icons.visibility_off,
+          iconOn: Icons.lock_outline,
+          iconOff: Icons.lock_open_outlined,
           deviceStatus: true),
     ]);
 
