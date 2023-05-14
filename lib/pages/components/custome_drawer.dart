@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../history_page.dart';
+
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
 
@@ -110,7 +112,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               drawerTile(Icons.people_alt_outlined, "Manage Members", () {}),
               drawerTile(Icons.tv_outlined, "Manage Devices", () {}),
-              drawerTile(Icons.history, "View History", () {}),
+              drawerTile(Icons.history, "View History", () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return HistoryPage();
+                }));
+              }),
               drawerTile(Icons.help_outline, "Help", () {}),
               const Spacer(),
               drawerTile(Icons.power_settings_new_outlined, "Logout", () {
