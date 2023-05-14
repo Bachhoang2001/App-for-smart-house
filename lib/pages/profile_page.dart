@@ -1,5 +1,5 @@
 import 'package:door_manager/constants.dart';
-import 'package:door_manager/models/user.dart';
+import 'package:door_manager/models/home.dart';
 import 'package:door_manager/pages/components/appbar_widget.dart';
 import 'package:door_manager/pages/components/textField_widget.dart';
 import 'package:flutter/material.dart';
