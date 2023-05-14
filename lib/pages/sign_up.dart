@@ -1,3 +1,4 @@
+//import 'package:door_manager/fire_base/fire_base_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:door_manager/constants.dart';
@@ -5,6 +6,45 @@ import 'package:door_manager/pages/home.dart';
 import 'package:door_manager/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+class FirAuth {
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  void createUser(
+    String name,
+    String email,
+    String password,
+    String phoneNumber,
+    Function onSuccess,
+  ) async {
+    try {
+      var userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      var user = userCredential.user;
+
+      if (user != null) {
+        DatabaseReference ref =
+            FirebaseDatabase.instance.reference().child("users");
+        ref.child(user.uid).set({
+          'name': name,
+          'email': email,
+          'password': password,
+          'userId': user.uid,
+          'phoneNumber': phoneNumber,
+        }).then((_) {
+          onSuccess();
+        }).catchError((error) {
+          print("Error saving user data: $error");
+        });
+      }
+    } catch (error) {
+      print("Error creating user: $error");
+    }
+  }
+}
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -84,7 +124,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
-                        cursorColor: KMainText,
                         controller: nameTextEditingController,
                         onChanged: (value) {},
                         decoration: InputDecoration(
@@ -93,7 +132,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               color: KMainText,
                             ),
                             labelText: "Your Name",
-                            labelStyle: TextStyle(color: KMainText),
                             border: InputBorder.none),
                       ),
                     ),
@@ -107,7 +145,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
-                        cursorColor: KMainText,
                         controller: emailTextEditingController,
                         onChanged: (value) {},
                         decoration: InputDecoration(
@@ -116,7 +153,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               color: KMainText,
                             ),
                             labelText: "Your Email",
-                            labelStyle: TextStyle(color: KMainText),
                             hintText: "abc@gmail.com",
                             border: InputBorder.none),
                       ),
@@ -131,7 +167,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
-                        cursorColor: KMainText,
                         controller: phoneTextEditingController,
                         onChanged: (value) {},
                         decoration: InputDecoration(
@@ -140,7 +175,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               color: KMainText,
                             ),
                             labelText: "Your Phone Number",
-                            labelStyle: TextStyle(color: KMainText),
                             border: InputBorder.none),
                       ),
                     ),
@@ -154,7 +188,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: kPrimaryLightColor,
                           borderRadius: BorderRadius.circular(30)),
                       child: TextField(
-                        cursorColor: KMainText,
                         controller: passwordTextEditingController,
                         obscureText: passwordVisible,
                         onChanged: (value) {},
@@ -164,7 +197,6 @@ class _SignupScreenState extends State<SignupScreen> {
                               color: KMainText,
                             ),
                             labelText: "Password",
-                            labelStyle: TextStyle(color: KMainText),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 passwordVisible
@@ -196,25 +228,30 @@ class _SignupScreenState extends State<SignupScreen> {
                               vertical: 20, horizontal: 40),
                           color: KMainText,
                           onPressed: () {
-                            print("Click signup");
-                            //registerNewUser(context);
-                            final Map<String, dynamic> userInfor = {
-                              'name': nameTextEditingController.text,
-                              'email': emailTextEditingController.text,
-                              'phoneNumber': phoneTextEditingController.text,
+                            final String name = nameTextEditingController.text;
+                            final String email = emailTextEditingController.text;
+                            final String password = passwordTextEditingController.text;
+                            final String phoneNumber = phoneTextEditingController.text;
+
+                            final Map<String, dynamic> userInfo = {
+                              'name': name,
+                              'email': email,
+                              'phoneNumner': phoneTextEditingController.text,
                             };
-                            //saveUserToFirestore(userInfor);
-                            FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
-                                    email: emailTextEditingController.text,
-                                    password:
-                                        passwordTextEditingController.text)
-                                .then((value) {
-                              print("Created an account");
-                              Navigator.pushNamed(context, '/home');
-                            }).onError((error, stackTrace) {
-                              print("Error ${error.toString()}");
-                            });
+
+                            final FirAuth firAuth = FirAuth();
+
+                            firAuth.createUser(
+                              name,
+                              email,
+                              password,
+                              phoneNumber,
+                              () {
+                                print("User created successfully");
+                                Navigator.pushNamed(context, '/home');
+                              },
+                            );
+
                           },
                           child: Text(
                             "SIGN UP",
@@ -258,25 +295,4 @@ class _SignupScreenState extends State<SignupScreen> {
       ),
     );
   }
-
-  // void saveUserToFirestore(User user) async {
-  //   try {
-  //     await FirebaseFirestore.instance
-  //         .collection('users')
-  //         .doc(user.uid)
-  //         .set(user.toMap());
-  //     print('User added');
-  //   } catch (error) {
-  //     print('Error adding user: $error');
-  //   }
-  // }
-
-  // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  // registerNewUser(BuildContext context) async {
-  //   final User firebaseUser =
-  //       (await _firebaseAuth.createUserWithEmailAndPassword(
-  //               email: emailTextEditingController.text,
-  //               password: passwordTextEditingController.text))
-  //           .user;
-  // }
 }
