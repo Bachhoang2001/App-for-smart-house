@@ -10,6 +10,7 @@ AppBar buildAppBar(BuildContext context, String title, List<Widget>? actions) {
         color: Colors.black,
       ),
     ),
+    centerTitle: true,
     leading: BackButton(
       color: Colors.black,
     ),
