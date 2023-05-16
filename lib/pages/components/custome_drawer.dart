@@ -111,9 +111,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 color: Colors.white,
                 height: 40,
               ),
-              drawerTile(Icons.people_alt_outlined, "Manage Members", () {Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                            return ManageMemberPage();  }));} ),
-              drawerTile(Icons.tv_outlined, "Manage Devices", () {}),
+              drawerTile(Icons.people_alt_outlined, "Manage Members", () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return ManageMemberPage();
+                }));
+              }),
               drawerTile(Icons.history, "View History", () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {

@@ -15,73 +15,121 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget listItem({required Map history}) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(width: 1, color: Colors.black38),
-          borderRadius: BorderRadius.circular(29),
-          color: KMainText.withOpacity(.5)),
+        border: Border.all(width: 1, color: KMainText.withOpacity(.5)),
+        borderRadius: BorderRadius.circular(29),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+              blurRadius: 10,
+              spreadRadius: 5,
+              color: KMainText.withOpacity(.15))
+        ],
+      ),
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       height: 110,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Row(
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.person),
+              Row(
+                children: [
+                  Icon(
+                    Icons.person_outline,
+                    color: KMainText,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Person: ",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: KMainText),
+                  ),
+                  Text(
+                    history['Person'],
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black.withOpacity(.5)),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 5.5,
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.lock_open,
+                    color: KMainText,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Status: ",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: KMainText),
+                  ),
+                  Text(
+                    history['Status'] ? "Success" : "Fail",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: history['Status'] ? Colors.green : Colors.red),
+                  ),
+                ],
+              ),
               SizedBox(
-                width: 2,
+                height: 5.5,
               ),
-              Text(
-                "Person: ",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+              Row(
+                children: [
+                  Icon(
+                    Icons.access_time,
+                    color: KMainText,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Time: ",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: KMainText),
+                  ),
+                  Text(
+                    history["Time"],
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black.withOpacity(.5)),
+                  )
+                ],
               ),
-              Text(
-                history['Person'],
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+              const SizedBox(
+                height: 5,
               ),
             ],
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: [
-              Icon(Icons.lock_open),
-              SizedBox(
-                width: 2,
-              ),
-              Text(
-                "Status: ",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-              ),
-              Text(
-                history['Status'] ? "Success" : "Fail",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: [
-              Icon(Icons.punch_clock),
-              SizedBox(
-                width: 2,
-              ),
-              Text(
-                "Time: ",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-              ),
-              Text(
-                history["Time"],
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
+          Spacer(),
+          IconButton(
+            onPressed: () {
+              DatabaseReference memberRef =
+                  FirebaseDatabase.instance.ref().child("History");
+              memberRef.child(history['key']).remove();
+            },
+            icon: Icon(Icons.delete),
+            color: Color.fromARGB(255, 214, 63, 52),
+          )
         ],
       ),
     );
@@ -94,7 +142,7 @@ class _HistoryPageState extends State<HistoryPage> {
     return Scaffold(
       appBar: buildAppBar(context, "History", null),
       body: Container(
-        height: double.infinity,
+        padding: EdgeInsets.all(14),
         child: FirebaseAnimatedList(
           query: dbRef,
           itemBuilder: (BuildContext context, DataSnapshot snapshot,
