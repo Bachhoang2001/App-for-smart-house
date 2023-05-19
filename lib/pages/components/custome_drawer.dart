@@ -87,7 +87,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         onPressed: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return ProfilePage();
+                            return ProfilePage(); // mới thêm
                           }));
                         },
                         style: OutlinedButton.styleFrom(

@@ -1,4 +1,3 @@
-//import 'package:door_manager/fire_base/fire_base_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:door_manager/constants.dart';
@@ -16,6 +15,7 @@ class FirAuth {
     String email,
     String password,
     String phoneNumber,
+    String imagePath, // Add the imgURL attribute
     Function onSuccess,
   ) async {
     try {
@@ -34,6 +34,7 @@ class FirAuth {
           'password': password,
           'userId': user.uid,
           'phoneNumber': phoneNumber,
+          'imgURL': imagePath, // Set the imgURL attribute in the database
         }).then((_) {
           onSuccess();
         }).catchError((error) {
@@ -232,11 +233,13 @@ class _SignupScreenState extends State<SignupScreen> {
                             final String email = emailTextEditingController.text;
                             final String password = passwordTextEditingController.text;
                             final String phoneNumber = phoneTextEditingController.text;
+                            final String imagePath = "https://kynguyenlamdep.com/wp-content/uploads/2022/06/avatar-cute-vui-nhon.jpg"; // Provide the desired image URL
 
                             final Map<String, dynamic> userInfo = {
                               'name': name,
                               'email': email,
                               'phoneNumner': phoneTextEditingController.text,
+                              'imgURL': imagePath, // Add the imgURL attribute to the userInfo map
                             };
 
                             final FirAuth firAuth = FirAuth();
@@ -246,6 +249,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               email,
                               password,
                               phoneNumber,
+                              imagePath, // Pass the imgURL value to the createUser method
                               () {
                                 print("User created successfully");
                                 Navigator.pushNamed(context, '/home');
@@ -296,3 +300,5 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 }
+
+
