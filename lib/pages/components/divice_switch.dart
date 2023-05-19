@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'dart:ffi';
+
 import 'package:door_manager/constants.dart';
 import 'package:door_manager/models/home.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class DeviceSwitch extends StatefulWidget {
@@ -10,17 +14,61 @@ class DeviceSwitch extends StatefulWidget {
 }
 
 class _DeviceSwitchState extends State<DeviceSwitch> {
+  late DatabaseReference _databaseRef;
+  bool _statusDevice = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _databaseRef =
+        FirebaseDatabase.instance.ref().child("HomeModel/devices/statusDevice");
+    _fetchStatusDevice();
+  }
+
+  Future<void> _fetchStatusDevice() async {
+    DatabaseEvent event = await _databaseRef.once();
+    if (event.snapshot != null) {
+      bool? value = event.snapshot.value as bool?;
+      if (value != null) {
+        setState(() {
+          _statusDevice = value;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     final DeviceInHome data = this.widget.data;
     final Duration _duration = Duration(milliseconds: 300);
 
     return GestureDetector(
       onTap: () {
         setState(() {
-          data.deviceStatus = !data.deviceStatus;
+          _statusDevice = !_statusDevice;
+          DatabaseReference pushRef = FirebaseDatabase.instance
+              .ref()
+              .child("HomeModel/devices/statusDevice");
+          pushRef.set(_statusDevice).then((_) {
+            print("statusDevice value updated successfully.");
+          }).catchError((error) {
+            print("Failed to update statusDevice value: $error");
+          });
         });
+        if (_statusDevice == true) {
+          Timer(Duration(seconds: 10), () {
+            _statusDevice = false;
+            DatabaseReference pushRefAgain = FirebaseDatabase.instance
+                .ref()
+                .child("HomeModel/devices/statusDevice");
+            pushRefAgain.set(_statusDevice).then((_) {
+              print("statusDevice value updated successfully.");
+            }).catchError((error) {
+              print("Failed to update statusDevice value: $error");
+            });
+          });
+        }
       },
       child: Container(
         width: size.width * 0.22,
@@ -33,7 +81,7 @@ class _DeviceSwitchState extends State<DeviceSwitch> {
           alignment: Alignment.center,
           children: [
             AnimatedPositioned(
-              top: !data.deviceStatus ? 0 : -size.height * 0.22 / 2,
+              top: !_statusDevice ? 0 : -size.height * 0.22 / 2,
               duration: _duration,
               child: Column(
                 children: [
@@ -43,7 +91,7 @@ class _DeviceSwitchState extends State<DeviceSwitch> {
               ),
             ),
             AnimatedPositioned(
-              bottom: data.deviceStatus ? 0 : -size.height * 0.22 / 2,
+              bottom: _statusDevice ? 0 : -size.height * 0.22 / 2,
               duration: _duration,
               child: Column(
                 children: [
@@ -53,7 +101,7 @@ class _DeviceSwitchState extends State<DeviceSwitch> {
               ),
             ),
             AnimatedPositioned(
-              top: data.deviceStatus ? 0 : (size.height * 0.22 / 2) + 10,
+              top: _statusDevice ? 0 : (size.height * 0.22 / 2) + 10,
               duration: _duration,
               child: Container(
                 padding: const EdgeInsets.all(15),
@@ -67,7 +115,7 @@ class _DeviceSwitchState extends State<DeviceSwitch> {
                       ),
                     ]),
                 child: Icon(
-                  data.deviceStatus ? data.iconOn : data.iconOff,
+                  _statusDevice ? Icons.lock_outline : Icons.lock_open_outlined,
                   color: KMainText,
                 ),
               ),
@@ -78,7 +126,7 @@ class _DeviceSwitchState extends State<DeviceSwitch> {
     );
   }
 
-  Container _deviceName(Size size, DeviceInHome data) {
+  Container _deviceName(size, DeviceInHome data) {
     return Container(
       margin: const EdgeInsets.all(8.0),
       width: size.width * 0.22 - 16,
@@ -101,7 +149,7 @@ class _DeviceSwitchState extends State<DeviceSwitch> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
-        data.deviceStatus ? "On" : "Off",
+        _statusDevice ? "Open" : "Close",
         style: const TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w300,

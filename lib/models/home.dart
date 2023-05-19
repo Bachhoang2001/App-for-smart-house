@@ -27,9 +27,8 @@ class HomeModel {
 
     List<DeviceInHome>? devicesList;
     if (devicesJson != null) {
-      devicesList = devicesJson
-          .map((device) => DeviceInHome.fromJson(device))
-          .toList();
+      devicesList =
+          devicesJson.map((device) => DeviceInHome.fromJson(device)).toList();
     }
 
     return HomeModel(
@@ -93,7 +92,6 @@ class DeviceInHome {
   }
 }
 
-
 class User {
   String imagePath;
   String name;
@@ -130,7 +128,6 @@ class User {
   }
 }
 
-
 HomeModel smartHome = HomeModel(
   homeImage: "assets/images/living_room.jpg",
   homeTemperature: "27°",
@@ -140,12 +137,6 @@ HomeModel smartHome = HomeModel(
   devices: [
     DeviceInHome(
       deviceName: "Main Door",
-      iconOn: Icons.visibility,
-      iconOff: Icons.visibility_off,
-      deviceStatus: true,
-    ),
-    DeviceInHome(
-      deviceName: "Second Door",
       iconOn: Icons.visibility,
       iconOff: Icons.visibility_off,
       deviceStatus: true,
