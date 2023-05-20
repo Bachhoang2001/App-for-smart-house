@@ -11,15 +11,23 @@ class AddMemberPage extends StatefulWidget {
 }
 
 class _AddMemberPageState extends State<AddMemberPage> {
-  final flutterWebViewPlugin = FlutterWebviewPlugin();
+  late final WebViewController _controller;
   String http = "http://";
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = WebViewController()
+      ..loadRequest(Uri.parse('http://192.168.232.154'));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return WebviewScaffold(
-      url: 'urlAddMember()',
+    return Scaffold(
       appBar: buildAppBar(context, "Add Member", null),
-      withJavascript: true,
-      withLocalStorage: true,
-      hidden: true,
+      body: WebViewWidget(
+        controller: _controller,
+      ),
     );
   }
 
