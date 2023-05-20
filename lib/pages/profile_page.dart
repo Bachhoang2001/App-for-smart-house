@@ -1,8 +1,9 @@
-// import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_database/firebase_database.dart';
-// import 'package:image_picker/image_picker.dart';
-// import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'components/appbar_widget.dart';
 
 // class AuthService {
 //   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -350,7 +351,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  DatabaseReference _userRef = FirebaseDatabase.instance.reference().child('users');
+  DatabaseReference _userRef =
+      FirebaseDatabase.instance.reference().child('users');
 
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -427,9 +429,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Edit Profile'),
-      ),
+      appBar: buildAppBar(context, "Profile", null),
       body: StreamBuilder(
         stream: _userRef.onValue,
         builder: (context, snapshot) {
@@ -549,7 +549,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           SizedBox(height: 16),
                           Text(
                             'User ID: ${user.uid ?? ''}',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
