@@ -1,3 +1,4 @@
+import 'package:door_manager/models/home.dart';
 import 'package:door_manager/pages/home.dart';
 import 'package:door_manager/pages/intro.dart';
 import 'package:door_manager/constants.dart';

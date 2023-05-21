@@ -16,6 +16,7 @@ class FirAuth {
     String password,
     String phoneNumber,
     String imagePath, // Add the imgURL attribute
+    String code,
     Function onSuccess,
   ) async {
     try {
@@ -34,6 +35,7 @@ class FirAuth {
           'password': password,
           'userId': user.uid,
           'phoneNumber': phoneNumber,
+          'code': code,
           'imgURL': imagePath, // Set the imgURL attribute in the database
         }).then((_) {
           onSuccess();
@@ -62,6 +64,7 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController phoneTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
+  TextEditingController codeTextEditingController = TextEditingController();
   @override
   void initState() {
     passwordVisible = true;
@@ -96,7 +99,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       width: size.width * 0.4,
                     )),
                 Positioned(
-                  top: 20,
+                  top: 40,
                   left: size.width * 0.37,
                   child: Text('Sign Up',
                       style: TextStyle(
@@ -108,12 +111,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 10,
-                    ),
-                    Image.asset(
-                      "assets/images/ava2.jpg",
-                      width: size.width * 0.5,
-                      height: size.height * 0.3,
+                      height: 50,
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 10),
@@ -216,8 +214,29 @@ class _SignupScreenState extends State<SignupScreen> {
                             border: InputBorder.none),
                       ),
                     ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      width: size.width * 0.8,
+                      height: size.height / 11,
+                      decoration: BoxDecoration(
+                          color: kPrimaryLightColor,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: TextField(
+                        controller: codeTextEditingController,
+                        onChanged: (value) {},
+                        decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.qr_code_2,
+                              color: KMainText,
+                            ),
+                            labelText: "Your code",
+                            border: InputBorder.none),
+                      ),
+                    ),
                     SizedBox(
-                      height: 10,
+                      height: 50,
                     ),
                     Container(
                       width: size.width * 0.8,
@@ -230,16 +249,22 @@ class _SignupScreenState extends State<SignupScreen> {
                           color: KMainText,
                           onPressed: () {
                             final String name = nameTextEditingController.text;
-                            final String email = emailTextEditingController.text;
-                            final String password = passwordTextEditingController.text;
-                            final String phoneNumber = phoneTextEditingController.text;
-                            final String imagePath = "https://kynguyenlamdep.com/wp-content/uploads/2022/06/avatar-cute-vui-nhon.jpg"; // Provide the desired image URL
-
+                            final String email =
+                                emailTextEditingController.text;
+                            final String password =
+                                passwordTextEditingController.text;
+                            final String phoneNumber =
+                                phoneTextEditingController.text;
+                            final String imagePath =
+                                ""; // Provide the desired image URL
+                            final String code = codeTextEditingController.text;
                             final Map<String, dynamic> userInfo = {
                               'name': name,
                               'email': email,
-                              'phoneNumner': phoneTextEditingController.text,
-                              'imgURL': imagePath, // Add the imgURL attribute to the userInfo map
+                              'phoneNumber': phoneTextEditingController.text,
+                              'code': codeTextEditingController.text,
+                              'imgURL':
+                                  imagePath, // Add the imgURL attribute to the userInfo map
                             };
 
                             final FirAuth firAuth = FirAuth();
@@ -249,13 +274,14 @@ class _SignupScreenState extends State<SignupScreen> {
                               email,
                               password,
                               phoneNumber,
-                              imagePath, // Pass the imgURL value to the createUser method
+                              imagePath,
+                              code,
+                              // Pass the imgURL value to the createUser method
                               () {
                                 print("User created successfully");
                                 Navigator.pushNamed(context, '/home');
                               },
                             );
-
                           },
                           child: Text(
                             "SIGN UP",
@@ -300,5 +326,3 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 }
-
-

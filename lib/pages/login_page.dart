@@ -278,8 +278,11 @@
 // }
 
 import 'package:door_manager/constants.dart';
+import 'package:door_manager/models/home.dart';
+import 'package:door_manager/pages/room_control_screen.dart';
 import 'package:door_manager/pages/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:door_manager/pages/home.dart';
 import 'package:flutter/services.dart';
@@ -410,7 +413,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 30),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 10),
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                       width: size.width * 0.8,
                       height: size.height / 11,
                       decoration: BoxDecoration(
@@ -436,7 +440,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 10),
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                       width: size.width * 0.8,
                       height: size.height / 11,
                       decoration: BoxDecoration(
@@ -457,7 +462,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelStyle: TextStyle(color: KMainText),
                           suffixIcon: IconButton(
                             icon: Icon(
-                              passwordVisible ? Icons.visibility : Icons.visibility_off,
+                              passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                               color: KMainText,
                             ),
                             onPressed: () {
@@ -496,17 +503,76 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(29),
                         child: MaterialButton(
-                          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 40),
                           color: KMainText,
                           onPressed: () {
                             FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
-                                  email: emailTextEditingController.text,
-                                  password: passwordTextEditingController.text,
-                                )
-                                .then((value) {
+                              email: emailTextEditingController.text,
+                              password: passwordTextEditingController.text,
+                            )
+                                .then((value) async {
                               if (value.user != null) {
-                                Navigator.pushReplacementNamed(context, "/home");
+                                print(value.user?.uid.toString());
+                                String uid = value.user!.uid.toString();
+                                final dbRef = FirebaseDatabase.instance
+                                    .ref()
+                                    .child("users")
+                                    .child(uid)
+                                    .child('code');
+                                final snapshot = await dbRef.get();
+                                String codeUser = snapshot.value.toString();
+                                if (codeUser == "vip") {
+                                  Navigator.pushReplacementNamed(
+                                      context, "/home");
+                                } else if (codeUser == "normal") {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => RoomControl(
+                                              homeData: smartHome)));
+                                }
+
+                                // DatabaseEvent event = await dbRef.once();
+                                // Map<dynamic, dynamic>? usersData = event
+                                //     .snapshot.value as Map<dynamic, dynamic>?;
+                                // if (usersData != null) {
+                                //   String desiredUserKey = '';
+                                //   String a = "t92NoozwPeQQ5vN0jV47UWQDfUv1";
+                                //   usersData.forEach((userKey, userData) {
+                                //     Map<dynamic, dynamic>? userDataMap =
+                                //         userData as Map<dynamic, dynamic>?;
+                                //     if (userDataMap != null &&
+                                //         userDataMap['userID'] == a) {
+                                //       print(userKey);
+                                //       desiredUserKey = userKey;
+                                //       return;
+                                //     }
+                                //   });
+
+                                //   if (desiredUserKey.isNotEmpty) {
+                                //     final desiredUserRef =
+                                //         dbRef.child(desiredUserKey);
+                                //     DatabaseEvent desiredUserEvent =
+                                //         await desiredUserRef.once();
+                                //     Map<dynamic, dynamic>? desiredUserData =
+                                //         desiredUserEvent.snapshot.value
+                                //             as Map<dynamic, dynamic>?;
+                                //     if (desiredUserData != null) {
+                                //       String desiredUserCode =
+                                //           desiredUserData['code'] as String ??
+                                //               '';
+                                //       print(desiredUserCode);
+                                //     } else {
+                                //       print("Desired user data is null");
+                                //     }
+                                //   } else {
+                                //     print("Desired user key is empty");
+                                //   }
+                                // } else {
+                                //   print("Member data is null");
+                                // }
                               }
                             }).catchError((error) {
                               print("Error: ${error.toString()}");
@@ -536,7 +602,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(color: KMainText),
                           ),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
                               return SignupScreen();
                             }));
                           },
