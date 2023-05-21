@@ -42,7 +42,8 @@ class _RoomControlState extends State<RoomControl> {
                           borderRadius: BorderRadius.circular(10)),
                       child: InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, "/home");
+                          Navigator.pop(context);
+                          // Navigator.pushNamed(context, "/home");
                         },
                         child: const Icon(
                             color: Colors.white, Icons.arrow_back_ios_new),
