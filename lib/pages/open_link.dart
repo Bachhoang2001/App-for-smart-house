@@ -1,3 +1,4 @@
+import 'package:door_manager/constants.dart';
 import 'package:door_manager/pages/components/appbar_widget.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +14,31 @@ class _OpenLinkState extends State<OpenLink> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context, "Add Member", null),
-      body: new Center(
-        child: InkWell(
-          onTap: () {
-            _launchUrl();
-          },
-          child: Text('URL link'),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          children: [
+            Text(
+              'Click the below link to add a new member: ',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            InkWell(
+              onTap: () {
+                _launchUrl();
+              },
+              child: Text(
+                'Link to add member',
+                style:
+                    TextStyle(color: KMainText.withOpacity(.8), fontSize: 18),
+              ),
+            ),
+          ],
         ),
       ),
     );
