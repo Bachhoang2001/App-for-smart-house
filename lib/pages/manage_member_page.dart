@@ -11,7 +11,11 @@ class ManageMemberPage extends StatefulWidget {
 }
 
 class _ManageMemberPageState extends State<ManageMemberPage> {
-  Query dbRef = FirebaseDatabase.instance.ref().child("Member");
+  Query dbRef = FirebaseDatabase.instance
+      .ref()
+      .child("Member")
+      .orderByChild('IsDel')
+      .equalTo(false);
 
   Widget listItem({required Map member}) {
     return Container(
@@ -61,11 +65,26 @@ class _ManageMemberPageState extends State<ManageMemberPage> {
                 icon: Icon(Icons.delete),
                 color: Color.fromARGB(255, 214, 63, 52),
                 onPressed: () {
-                  // Xử lý hành động xóa thành viên tại đây
-                  // Ví dụ: Gọi hàm xóa thành viên từ DatabaseReference
+                  String key = member['key'];
                   DatabaseReference memberRef =
                       FirebaseDatabase.instance.ref().child("Member");
-                  memberRef.child(member['key']).remove();
+                  memberRef.child(key).once().then((DatabaseEvent event) {
+                    Map<dynamic, dynamic> data =
+                        event.snapshot.value as Map<dynamic, dynamic>;
+                    String name = data['Name'];
+                    bool isDel = data['IsDel'];
+                    memberRef.child(key).update({'IsDel': true});
+                    DatabaseReference memDel =
+                        FirebaseDatabase.instance.ref().child("Delete");
+                    print('$name');
+                    print('$isDel');
+                    memDel.update({
+                      'Status': true,
+                      'Name': name,
+                    });
+                  });
+
+                  //memberRef.child(member['key']).remove();
                 },
               ),
             ],
