@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import '../constants.dart';
 import 'components/appbar_widget.dart';
 
 // class AuthService {
@@ -312,12 +312,6 @@ import 'components/appbar_widget.dart';
 //   });
 // }
 
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -363,15 +357,15 @@ class _ProfilePageState extends State<ProfilePage> {
   String? loggedInEmail;
   final AuthService _authService = AuthService();
 
-  Future getImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().getImage(source: source);
+  // Future getImage(ImageSource source) async {
+  //   final pickedFile = await ImagePicker().getImage(source: source);
 
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-      });
-    }
-  }
+  //   if (pickedFile != null) {
+  //     setState(() {
+  //       _image = File(pickedFile.path);
+  //     });
+  //   }
+  // }
 
   void _updateProfile() {
     setState(() {
@@ -474,7 +468,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   children: <Widget>[
                                     ElevatedButton(
                                       onPressed: () {
-                                        getImage(ImageSource.camera);
+                                        //getImage(ImageSource.camera);
                                         Navigator.pop(context);
                                       },
                                       child: Text('Take a picture'),
@@ -486,7 +480,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     SizedBox(height: 20),
                                     ElevatedButton(
                                       onPressed: () {
-                                        getImage(ImageSource.gallery);
+                                        // getImage(ImageSource.gallery);
                                         Navigator.pop(context);
                                       },
                                       child: Text('Select from gallery'),
@@ -520,37 +514,112 @@ class _ProfilePageState extends State<ProfilePage> {
                           TextField(
                             controller: _nameController,
                             decoration: InputDecoration(
+                              focusColor: KMainText,
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(29),
+                                  borderSide:
+                                      BorderSide(width: 1, color: KMainText)),
                               labelText: 'Name',
-                              prefixIcon: Icon(Icons.person),
-                              border: OutlineInputBorder(),
+                              labelStyle: TextStyle(color: KMainText),
+                              prefixIcon: Icon(
+                                Icons.person,
+                                color: KMainText,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(29),
+                              ),
                             ),
                             onChanged: (name) {},
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 20),
                           TextField(
                             controller: _emailController,
                             decoration: InputDecoration(
+                              focusColor: KMainText,
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(29),
+                                  borderSide:
+                                      BorderSide(width: 1, color: KMainText)),
                               labelText: 'Email',
-                              prefixIcon: Icon(Icons.email),
-                              border: OutlineInputBorder(),
+                              labelStyle: TextStyle(color: KMainText),
+                              prefixIcon: Icon(
+                                Icons.email,
+                                color: KMainText,
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(29)),
                             ),
                             onChanged: (email) {},
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 20),
                           TextField(
                             controller: _phoneNumberController,
                             decoration: InputDecoration(
+                              focusColor: KMainText,
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(29),
+                                  borderSide:
+                                      BorderSide(width: 1, color: KMainText)),
                               labelText: 'Phone Number',
-                              prefixIcon: Icon(Icons.phone),
-                              border: OutlineInputBorder(),
+                              labelStyle: TextStyle(color: KMainText),
+                              prefixIcon: Icon(
+                                Icons.phone,
+                                color: KMainText,
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(29)),
                             ),
                             onChanged: (phoneNumber) {},
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Text(
                             'User ID: ${user.uid ?? ''}',
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: KMainText.withOpacity(.7)),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Code for admin: ',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: KMainText.withOpacity(.7)),
+                              ),
+                              Text(
+                                'vip',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Code for member: ',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: KMainText.withOpacity(.7)),
+                              ),
+                              Text(
+                                'normal',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              )
+                            ],
                           ),
                         ],
                       ),
@@ -571,6 +640,7 @@ class _ProfilePageState extends State<ProfilePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: KMainText.withOpacity(.8),
         onPressed: () {
           showDialog(
             context: context,
@@ -590,11 +660,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         },
                         child: Text('Update'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
+                          primary: const Color.fromARGB(255, 92, 196, 96),
                           onPrimary: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: () {
                           setState(() {
@@ -604,7 +674,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         },
                         child: Text('Cancel'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
+                          primary: const Color.fromARGB(255, 226, 85, 75),
                           onPrimary: Colors.white,
                         ),
                       ),

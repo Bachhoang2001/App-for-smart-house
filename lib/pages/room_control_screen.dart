@@ -45,8 +45,8 @@ class _RoomControlState extends State<RoomControl> {
                           Navigator.pop(context);
                           // Navigator.pushNamed(context, "/home");
                         },
-                        child: const Icon(
-                            color: Colors.white, Icons.arrow_back_ios_new),
+                        child:
+                            const Icon(color: Colors.white, Icons.arrow_back),
                       ),
                     ),
                   ],
@@ -112,13 +112,21 @@ class _RoomControlState extends State<RoomControl> {
             Padding(padding: EdgeInsets.all(10)),
             Padding(
               padding: const EdgeInsets.only(left: 20),
-              child: Text(
-                "27°",
-                style: const TextStyle(
-                  fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                children: [
+                  Text(
+                    'Temperature of home: ',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  Text(
+                    "27°",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(padding: EdgeInsets.all(10)),
@@ -144,7 +152,7 @@ class _RoomControlState extends State<RoomControl> {
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.arrow_forward_ios),
+                    icon: const Icon(Icons.add),
                     color: Colors.white,
                   ),
                 ],
