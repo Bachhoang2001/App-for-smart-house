@@ -17,8 +17,7 @@ class _AddMemberPageState extends State<AddMemberPage> {
   @override
   void initState() {
     super.initState();
-    _controller = WebViewController()
-      ..loadRequest(Uri.parse('http://192.168.232.154'));
+    _controller = WebViewController()..loadRequest(Uri.parse(urlAddMember()));
   }
 
   @override

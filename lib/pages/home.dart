@@ -5,12 +5,12 @@ import 'package:door_manager/models/home.dart';
 import 'package:door_manager/pages/add_images.dart';
 import 'package:door_manager/pages/add_member.dart';
 import 'package:door_manager/pages/components/custome_drawer.dart';
+import 'package:door_manager/pages/open_link.dart';
 import 'package:door_manager/pages/room_card.dart';
+import 'package:door_manager/pages/warning_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,6 +24,27 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController nameTextEditingController = TextEditingController();
   String imageURL = "";
   String http = "http://";
+  DatabaseReference _databaseReference = FirebaseDatabase.instance.reference();
+  bool showNotification = true;
+
+  void _setupDatabaseListener() {
+    _databaseReference.child('Warning').onChildChanged.listen((event) {
+      // Update your UI to show the red notification icon or indicator
+      setState(() {
+        showNotification = true;
+      });
+      if (event.snapshot.key == 'new_key') {
+        print("Warning: New key added");
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _setupDatabaseListener();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +52,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        // appBar: AppBar(
+        //   actions: [
+        //     showNotification
+        //         ? Icon(
+        //             Icons.notifications,
+        //             color: Colors.red,
+        //           )
+        //         : SizedBox()
+        //   ],
+        // ),
         drawer: CustomDrawer(),
         body: SafeArea(
             child: Column(
@@ -42,13 +73,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Builder(builder: (context) {
-                      return IconButton(
+                    Row(
+                      children: [
+                        Builder(builder: (context) {
+                          return IconButton(
+                              onPressed: () {
+                                Scaffold.of(context).openDrawer();
+                              },
+                              icon: Icon(Icons.menu, color: KMainText));
+                        }),
+                        Spacer(),
+                        MaterialButton(
                           onPressed: () {
-                            Scaffold.of(context).openDrawer();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WarningPage()));
+                            setState(() {
+                              showNotification = false;
+                            });
                           },
-                          icon: Icon(Icons.menu));
-                    }),
+                          child: showNotification
+                              ? Icon(Icons.notifications, color: Colors.red)
+                              : Icon(Icons.notifications, color: KMainText),
+                        )
+                      ],
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -143,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       print(c);
                                       Navigator.of(context).push(
                                           MaterialPageRoute(builder: (context) {
-                                        return AddMemberPage();
+                                        return OpenLink();
                                       }));
                                     },
                                   ),
