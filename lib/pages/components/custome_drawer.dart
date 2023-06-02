@@ -1,4 +1,5 @@
 import 'package:door_manager/constants.dart';
+import 'package:door_manager/pages/help.dart';
 import 'package:door_manager/pages/home.dart';
 import 'package:door_manager/pages/manage_member_page.dart';
 import 'package:door_manager/pages/profile_page.dart';
@@ -123,7 +124,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   return HistoryPage();
                 }));
               }),
-              drawerTile(Icons.help_outline, "Help", () {}),
+              drawerTile(Icons.help_outline, "Help", () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return GuideLine();
+                }));
+              }),
               const Spacer(),
               drawerTile(Icons.power_settings_new_outlined, "Logout", () {
                 FirebaseAuth.instance.signOut().then((value) {
